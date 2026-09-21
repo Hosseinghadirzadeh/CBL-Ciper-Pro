@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/LBC_Cipher_Pro/
+installer/output/
+portable_data/
+app/portable_data/
+dist/LBC_Cipher_Pro/portable_data/
+dist/
+release/
+artifacts/

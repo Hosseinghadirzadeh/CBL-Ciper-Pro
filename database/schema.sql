@@ -1,0 +1,20 @@
+PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS authors (
+ id INTEGER PRIMARY KEY, full_name TEXT NOT NULL, nationality TEXT NOT NULL DEFAULT 'UNKNOWN',
+ birth_country TEXT NOT NULL DEFAULT 'UNKNOWN', birth_city TEXT NOT NULL DEFAULT 'UNKNOWN',
+ latitude REAL, longitude REAL, metadata_source TEXT NOT NULL DEFAULT 'UNKNOWN', UNIQUE(full_name)
+);
+CREATE TABLE IF NOT EXISTS books (
+ id INTEGER PRIMARY KEY, gutenberg_id INTEGER, title TEXT NOT NULL, author_id INTEGER NOT NULL REFERENCES authors(id),
+ language TEXT NOT NULL DEFAULT 'UNKNOWN', publication_year INTEGER, local_path TEXT NOT NULL UNIQUE,
+ source_url TEXT, sha256 TEXT NOT NULL, blake3 TEXT NOT NULL, normalization_version INTEGER NOT NULL,
+ indexed INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, UNIQUE(gutenberg_id)
+);
+CREATE TABLE IF NOT EXISTS character_positions (book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE, character TEXT NOT NULL, positions BLOB NOT NULL, PRIMARY KEY(book_id, character));
+CREATE TABLE IF NOT EXISTS word_positions (book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE, word TEXT NOT NULL, positions BLOB NOT NULL, PRIMARY KEY(book_id, word));
+CREATE TABLE IF NOT EXISTS encryption_history (id INTEGER PRIMARY KEY, filename TEXT, operation TEXT NOT NULL, algorithm TEXT NOT NULL, success INTEGER NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS metadata_sources (id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, url TEXT);
+PRAGMA user_version = 1;
+

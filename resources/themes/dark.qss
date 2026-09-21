@@ -1,0 +1,3 @@
+/* The production dark theme is embedded in gui/main_window.py so frozen builds
+   always have a safe fallback. This file is ready for user-selectable themes. */
+
