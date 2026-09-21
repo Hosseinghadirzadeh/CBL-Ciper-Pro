@@ -4,7 +4,7 @@ import base64
 from pathlib import Path
 
 from core.container_format import unpack
-from core.lbc_geo_cipher import LBCGeoCipher
+from core.cbl_geo_cipher import CBLGeoCipher
 from core.token_codec import parse_json
 from crypto.aes_engine import decrypt as aes_decrypt
 from crypto.hkdf_engine import separate_keys
@@ -14,7 +14,7 @@ from database.db import Database
 
 class DecryptionService:
     def __init__(self, db: Database):
-        self.cipher = LBCGeoCipher(db)
+        self.cipher = CBLGeoCipher(db)
 
     def decrypt_bytes(self, blob: bytes, password: str, progress=None) -> tuple[bytes, dict]:
         header, ciphertext, aad = unpack(blob)
@@ -35,4 +35,3 @@ class DecryptionService:
         temporary = target.with_suffix(target.suffix + ".part")
         temporary.write_bytes(data)
         temporary.replace(target)
-

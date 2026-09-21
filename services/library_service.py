@@ -30,7 +30,7 @@ class LibraryService:
         return book_id
 
     def ensure_online_corpus(self, required_count: int, *, client: GutenbergClient | None = None, progress=None) -> list:
-        """Download and index enough curated Gutenberg books for LBC-GEO.
+        """Download and index enough curated Gutenberg books for CBL-GEO.
 
         The public books come from the internet; encryption and passwords remain
         on the user's computer. Downloads are cached for later offline use.

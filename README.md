@@ -1,10 +1,10 @@
 # CBL Ciper Pro
 
-CBL Ciper Pro is a Windows desktop application for the experimental **LBC-GEO v1** reversible literary transformation. It combines multiple Project Gutenberg books, author metadata, and geographic metadata, then protects the resulting token stream with established authenticated encryption.
+CBL Ciper Pro is a Windows desktop application for the experimental **CBL-GEO v1** reversible literary transformation. It combines multiple Project Gutenberg books, author metadata, and geographic metadata, then protects the resulting token stream with established authenticated encryption.
 
-The application presents **LBC-GEO v1** as a custom encryption option and includes a dedicated visual page documenting its Multi-Book, Nationality, and Geographic transformation pipeline.
+The application presents **CBL-GEO v1** as a custom encryption option and includes a dedicated visual page documenting its Multi-Book, Nationality, and Geographic transformation pipeline.
 
-> LBC-GEO is not, by itself, modern cryptography. Confidentiality and authenticity come from AES-256-GCM. Password keys use Argon2id and purpose-specific subkeys use HKDF-SHA256.
+> CBL-GEO is not, by itself, modern cryptography. Confidentiality and authenticity come from AES-256-GCM. Password keys use Argon2id and purpose-specific subkeys use HKDF-SHA256.
 
 ## Architecture and exact pipeline
 
@@ -33,7 +33,7 @@ Book originals remain unchanged. A deterministic NFC/case-folded alphanumeric co
 
 ## LBCX v1 container
 
-The binary format begins with `LBCX`, format version, header length, ciphertext length, canonical JSON header, and AES-GCM ciphertext/tag. The authenticated header records the cipher, Argon2id parameters, random salt, fresh AES nonce, fresh message nonce, and LBC-GEO version. The corpus manifest and original filename are encrypted. Unsupported versions and malformed lengths are rejected.
+The binary format begins with `LBCX`, format version, header length, ciphertext length, canonical JSON header, and AES-GCM ciphertext/tag. The authenticated header records the cipher, Argon2id parameters, random salt, fresh AES nonce, fresh message nonce, and CBL-GEO version. The corpus manifest and original filename are encrypted. Unsupported versions and malformed lengths are rejected.
 
 ## Security and threat model
 

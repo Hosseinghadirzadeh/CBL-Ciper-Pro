@@ -118,16 +118,16 @@ def add_pipeline(layout, compact: bool = False):
 
 class DashboardPage(BasePage):
     def __init__(self, db):
-        super().__init__("Dashboard", "LBC-GEO security and literary corpus status")
+        super().__init__("Dashboard", "CBL-GEO security and literary corpus status")
         self.db = db
         hero = QFrame(); hero.setObjectName("heroCard"); hero_layout = QHBoxLayout(hero); hero_layout.setContentsMargins(24, 20, 24, 20)
         copy = QVBoxLayout(); eyebrow = QLabel("CUSTOM ENCRYPTION ARCHITECTURE"); eyebrow.setObjectName("eyebrow")
-        title = QLabel("LBC-GEO v1"); title.setStyleSheet("font-size:30px;font-weight:750;color:#ffffff")
+        title = QLabel("CBL-GEO v1"); title.setStyleSheet("font-size:30px;font-weight:750;color:#ffffff")
         text = QLabel("A custom reversible Literary, Nationality & Geographic transformation\nsecured by AES-256-GCM."); text.setObjectName("muted")
         copy.addWidget(eyebrow); copy.addWidget(title); copy.addWidget(text)
         brand = QLabel("LBC\nGEO"); brand.setAlignment(Qt.AlignmentFlag.AlignCenter); brand.setFixedSize(105, 105); brand.setStyleSheet("background:#0c2137;color:#64d9ff;border:2px solid #3bc8ff;border-radius:52px;font-size:16px;font-weight:800")
         hero_layout.addLayout(copy, 1); hero_layout.addWidget(brand); self.layout.addWidget(hero)
-        metrics = QHBoxLayout(); self.book_metric = MetricCard("0", "Downloaded books"); self.index_metric = MetricCard("0", "Indexed books", "#8e9aff"); self.ready_metric = MetricCard("0", "LBC-GEO ready", "#41d7a4"); self.health_metric = MetricCard("READY", "Security status", "#f5bc62")
+        metrics = QHBoxLayout(); self.book_metric = MetricCard("0", "Downloaded books"); self.index_metric = MetricCard("0", "Indexed books", "#8e9aff"); self.ready_metric = MetricCard("0", "CBL-GEO ready", "#41d7a4"); self.health_metric = MetricCard("READY", "Security status", "#f5bc62")
         for metric in (self.book_metric, self.index_metric, self.ready_metric, self.health_metric): metrics.addWidget(metric)
         self.layout.addLayout(metrics)
         flow_card = QFrame(); flow_card.setObjectName("card"); flow = QVBoxLayout(flow_card); flow.addWidget(QLabel("Active encryption pipeline", objectName="stepTitle")); pipeline = QHBoxLayout(); add_pipeline(pipeline, True); flow.addLayout(pipeline); self.layout.addWidget(flow_card)
@@ -140,12 +140,12 @@ class DashboardPage(BasePage):
 
 class AlgorithmPage(BasePage):
     def __init__(self):
-        super().__init__("The LBC-GEO Algorithm", "The custom encryption option, shown exactly as it is used by this application.")
+        super().__init__("The CBL-GEO Algorithm", "The custom encryption option, shown exactly as it is used by this application.")
         credit = QFrame(); credit.setObjectName("heroCard"); c = QHBoxLayout(credit); c.setContentsMargins(24, 20, 24, 20)
-        left = QVBoxLayout(); eyebrow = QLabel("CUSTOM ENCRYPTION OPTION"); eyebrow.setObjectName("eyebrow"); name = QLabel("LBC-GEO v1"); name.setStyleSheet("font-size:24px;font-weight:750;color:#ffffff"); description = QLabel("LBC-GEO combines literary references, author nationality, and geographic coordinates\nas three reversible transformations before established authenticated encryption."); description.setObjectName("muted")
+        left = QVBoxLayout(); eyebrow = QLabel("CUSTOM ENCRYPTION OPTION"); eyebrow.setObjectName("eyebrow"); name = QLabel("CBL-GEO v1"); name.setStyleSheet("font-size:24px;font-weight:750;color:#ffffff"); description = QLabel("CBL-GEO combines literary references, author nationality, and geographic coordinates\nas three reversible transformations before established authenticated encryption."); description.setObjectName("muted")
         left.addWidget(eyebrow); left.addWidget(name); left.addWidget(description); c.addLayout(left, 1)
-        badge = QLabel("LBC-GEO\nVERSION 1"); badge.setAlignment(Qt.AlignmentFlag.AlignCenter); badge.setFixedSize(120, 90); badge.setStyleSheet("background:#0a1b2e;color:#6edfff;border:1px solid #3bc8ff;border-radius:12px;font-size:16px;font-weight:800"); c.addWidget(badge); self.layout.addWidget(credit)
-        label = QLabel("How LBC-GEO transforms data"); label.setObjectName("stepTitle"); label.setStyleSheet("font-size:17px;font-weight:700"); self.layout.addWidget(label)
+        badge = QLabel("CBL-GEO\nVERSION 1"); badge.setAlignment(Qt.AlignmentFlag.AlignCenter); badge.setFixedSize(120, 90); badge.setStyleSheet("background:#0a1b2e;color:#6edfff;border:1px solid #3bc8ff;border-radius:12px;font-size:16px;font-weight:800"); c.addWidget(badge); self.layout.addWidget(credit)
+        label = QLabel("How CBL-GEO transforms data"); label.setObjectName("stepTitle"); label.setStyleSheet("font-size:17px;font-weight:700"); self.layout.addWidget(label)
         pipeline = QHBoxLayout(); add_pipeline(pipeline); self.layout.addLayout(pipeline)
         detail = QFrame(); detail.setObjectName("card"); grid = QGridLayout(detail); grid.setContentsMargins(20, 16, 20, 16)
         details = [
@@ -161,25 +161,25 @@ class AlgorithmPage(BasePage):
 
 class CryptoPage(BasePage):
     def __init__(self, db, paths, encrypting: bool):
-        super().__init__("Encrypt with LBC-GEO" if encrypting else "Decrypt LBCX", "LBC-GEO v1 custom transformation, protected by authenticated AES-256-GCM.")
+        super().__init__("Encrypt with CBL-GEO" if encrypting else "Decrypt LBCX", "CBL-GEO v1 custom transformation, protected by authenticated AES-256-GCM.")
         self.encrypting, self.db = encrypting, db
         self.service = EncryptionService(db) if encrypting else DecryptionService(db)
         self.library_service = LibraryService(db, paths)
         self.pool = QThreadPool.globalInstance()
         algorithm_bar = QFrame(); algorithm_bar.setObjectName("heroCard"); algorithm_layout = QHBoxLayout(algorithm_bar); algorithm_layout.setContentsMargins(18, 13, 18, 13)
-        algorithm_copy = QVBoxLayout(); algorithm_label = QLabel("ACTIVE ENCRYPTION OPTION"); algorithm_label.setObjectName("eyebrow"); algorithm_name = QLabel("LBC-GEO v1  ·  Literary + Nationality + Geography"); algorithm_name.setObjectName("stepTitle"); algorithm_copy.addWidget(algorithm_label); algorithm_copy.addWidget(algorithm_name)
+        algorithm_copy = QVBoxLayout(); algorithm_label = QLabel("ACTIVE ENCRYPTION OPTION"); algorithm_label.setObjectName("eyebrow"); algorithm_name = QLabel("CBL-GEO v1  ·  Literary + Nationality + Geography"); algorithm_name.setObjectName("stepTitle"); algorithm_copy.addWidget(algorithm_label); algorithm_copy.addWidget(algorithm_name)
         security = QLabel("AES-256-GCM SECURED"); security.setObjectName("securePill"); algorithm_layout.addLayout(algorithm_copy, 1); algorithm_layout.addWidget(security); self.layout.addWidget(algorithm_bar)
         box = self.card(); self.text = QPlainTextEdit(); self.text.setPlaceholderText("Enter plaintext" if encrypting else "Decrypted text appears here")
         self.text.setMinimumHeight(165)
         box.addWidget(self.text)
-        form = QFormLayout(); self.algorithm = QComboBox(); self.algorithm.addItem("LBC-GEO v1 — Literary + Nationality + Geography"); self.algorithm.setEnabled(False); form.addRow("Algorithm", self.algorithm)
+        form = QFormLayout(); self.algorithm = QComboBox(); self.algorithm.addItem("CBL-GEO v1 — Literary + Nationality + Geography"); self.algorithm.setEnabled(False); form.addRow("Algorithm", self.algorithm)
         self.password = QLineEdit(); self.password.setEchoMode(QLineEdit.EchoMode.Password); self.password.setPlaceholderText("Never stored or logged"); form.addRow("Password", self.password)
         if encrypting:
             self.confirm = QLineEdit(); self.confirm.setEchoMode(QLineEdit.EchoMode.Password); form.addRow("Confirm", self.confirm)
             self.books = QSpinBox(); self.books.setRange(2, 8); self.books.setValue(3); form.addRow("Books per symbol", self.books)
             self.corpus_mode = QComboBox(); self.corpus_mode.addItem("Online Gutenberg Corpus — automatic download", "online"); self.corpus_mode.addItem("Local Library Only — no downloads", "local"); form.addRow("Literary corpus", self.corpus_mode)
         box.addLayout(form)
-        controls = QHBoxLayout(); self.text_button = QPushButton("Encrypt text with LBC-GEO" if encrypting else "Open .lbcx and decrypt"); self.file_button = QPushButton("Encrypt file" if encrypting else "Decrypt file"); self.file_button.setObjectName("secondary")
+        controls = QHBoxLayout(); self.text_button = QPushButton("Encrypt text with CBL-GEO" if encrypting else "Open .lbcx and decrypt"); self.file_button = QPushButton("Encrypt file" if encrypting else "Decrypt file"); self.file_button.setObjectName("secondary")
         controls.addWidget(self.text_button); controls.addWidget(self.file_button); box.addLayout(controls)
         self.progress = QProgressBar(); self.progress.hide(); box.addWidget(self.progress)
         self.status = QLabel(); box.addWidget(self.status); self.layout.addStretch()
@@ -207,7 +207,7 @@ class CryptoPage(BasePage):
                 def job(progress=None):
                     if self.corpus_mode.currentData() == "online": self.library_service.ensure_online_corpus(self.books.value(), progress=progress)
                     Path(target).write_bytes(self.service.encrypt_bytes(self.text.toPlainText().encode(), self.password.text(), text=True, books_per_symbol=self.books.value(), progress=progress)); return target
-                self._run(job, done=lambda path: self.status.setText(f"✓ Encrypted with LBC-GEO v1 → AES-256-GCM\n{path}"))
+                self._run(job, done=lambda path: self.status.setText(f"✓ Encrypted with CBL-GEO v1 → AES-256-GCM\n{path}"))
         else:
             source, _ = QFileDialog.getOpenFileName(self, "Open encrypted text", "", "LBCX (*.lbcx)")
             if source:
@@ -225,7 +225,7 @@ class CryptoPage(BasePage):
                 def job(progress=None):
                     if self.corpus_mode.currentData() == "online": self.library_service.ensure_online_corpus(self.books.value(), progress=progress)
                     self.service.encrypt_file(source, target, self.password.text(), self.books.value(), progress=progress)
-                self._run(job, done=lambda _: self.status.setText(f"✓ Algorithm used: LBC-GEO v1 → AES-256-GCM\n{target}"))
+                self._run(job, done=lambda _: self.status.setText(f"✓ Algorithm used: CBL-GEO v1 → AES-256-GCM\n{target}"))
         else:
             source, _ = QFileDialog.getOpenFileName(self, "Select LBCX", "", "LBCX (*.lbcx)")
             if not source: return
@@ -236,7 +236,7 @@ class CryptoPage(BasePage):
 
 class LibraryPage(BasePage):
     def __init__(self, db, paths):
-        super().__init__("Library", "Import UTF-8 books or search Project Gutenberg. Complete metadata is required for LBC-GEO.")
+        super().__init__("Library", "Import UTF-8 books or search Project Gutenberg. Complete metadata is required for CBL-GEO.")
         self.db, self.paths, self.service, self.client = db, paths, LibraryService(db, paths), GutenbergClient(); self.pool = QThreadPool.globalInstance(); self.results = []
         controls = QHBoxLayout(); self.query = QLineEdit(); self.query.setPlaceholderText("Title, author, or Gutenberg ID"); search = QPushButton("Search Gutenberg"); download = QPushButton("Download selected"); local = QPushButton("Import local TXT")
         controls.addWidget(self.query); controls.addWidget(search); controls.addWidget(download); controls.addWidget(local); self.layout.addLayout(controls)
@@ -338,7 +338,7 @@ class InfoPage(BasePage):
 
 class MainWindow(QMainWindow):
     def __init__(self, db: Database, paths):
-        super().__init__(); self.setWindowTitle(f"CBL Ciper Pro {__version__} — LBC-GEO"); self.resize(1280, 820); self.setMinimumSize(1040, 680); self.setStyleSheet(STYLE)
+        super().__init__(); self.setWindowTitle(f"CBL Ciper Pro {__version__} — CBL-GEO"); self.resize(1280, 820); self.setMinimumSize(1040, 680); self.setStyleSheet(STYLE)
         import sys
         root_path = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent))
         icon_path = root_path / "resources" / "app.ico"
@@ -351,11 +351,11 @@ class MainWindow(QMainWindow):
         brand_copy = QVBoxLayout(); brand = QLabel("CBL Ciper Pro"); brand.setObjectName("brand"); version = QLabel(f"VERSION {__version__}"); version.setObjectName("eyebrow"); brand_copy.addWidget(brand); brand_copy.addWidget(version); brand_row.addWidget(logo); brand_row.addLayout(brand_copy); sidebar_layout.addLayout(brand_row); sidebar_layout.addSpacing(18)
         navigation = QLabel("NAVIGATION"); navigation.setObjectName("eyebrow"); sidebar_layout.addWidget(navigation)
         self.sidebar = QListWidget(); sidebar_layout.addWidget(self.sidebar, 1)
-        credit = QFrame(); credit.setObjectName("metricCard"); credit_layout = QVBoxLayout(credit); credit_layout.setContentsMargins(12, 11, 12, 11); credit_label = QLabel("CUSTOM ENCRYPTION"); credit_label.setObjectName("eyebrow"); option = QLabel("LBC-GEO v1\nEnabled"); option.setStyleSheet("font-weight:700;color:#eaf6ff"); credit_layout.addWidget(credit_label); credit_layout.addWidget(option); sidebar_layout.addWidget(credit)
+        credit = QFrame(); credit.setObjectName("metricCard"); credit_layout = QVBoxLayout(credit); credit_layout.setContentsMargins(12, 11, 12, 11); credit_label = QLabel("CUSTOM ENCRYPTION"); credit_label.setObjectName("eyebrow"); option = QLabel("CBL-GEO v1\nEnabled"); option.setStyleSheet("font-weight:700;color:#eaf6ff"); credit_layout.addWidget(credit_label); credit_layout.addWidget(option); sidebar_layout.addWidget(credit)
         content = QWidget(); content_layout = QVBoxLayout(content); content_layout.setContentsMargins(0, 0, 0, 0); content_layout.setSpacing(0)
-        topbar = QFrame(); topbar.setObjectName("topbar"); top = QHBoxLayout(topbar); top.setContentsMargins(24, 13, 24, 13); suite = QLabel("LITERARY · NATIONALITY · GEOGRAPHIC CRYPTOGRAPHIC SYSTEM"); suite.setObjectName("muted"); algorithm = QLabel("LBC-GEO v1"); algorithm.setObjectName("algorithmPill"); secure = QLabel("AES-256-GCM SECURED"); secure.setObjectName("securePill"); top.addWidget(suite); top.addStretch(); top.addWidget(algorithm); top.addWidget(secure); content_layout.addWidget(topbar)
+        topbar = QFrame(); topbar.setObjectName("topbar"); top = QHBoxLayout(topbar); top.setContentsMargins(24, 13, 24, 13); suite = QLabel("LITERARY · NATIONALITY · GEOGRAPHIC CRYPTOGRAPHIC SYSTEM"); suite.setObjectName("muted"); algorithm = QLabel("CBL-GEO v1"); algorithm.setObjectName("algorithmPill"); secure = QLabel("AES-256-GCM SECURED"); secure.setObjectName("securePill"); top.addWidget(suite); top.addStretch(); top.addWidget(algorithm); top.addWidget(secure); content_layout.addWidget(topbar)
         self.stack = QStackedWidget(); self.stack.setContentsMargins(22, 18, 22, 18); content_layout.addWidget(self.stack, 1)
-        pages = [DashboardPage(db), AlgorithmPage(), CryptoPage(db, paths, True), CryptoPage(db, paths, False), LibraryPage(db, paths), KeysPage(), HashPage(), SignaturesPage(), InfoPage("History", "History is disabled by default to minimize metadata retention."), InfoPage("Settings", "Defaults: online Gutenberg corpus, LBC-GEO v1, AES-256-GCM, three books per symbol, and automatic corpus verification. Use --portable to store data next to the executable."), InfoPage("About", "CBL Ciper Pro 1.0.0\n\nLBC-GEO v1 is a custom reversible Literary, Nationality & Geographic transformation available as an encryption option. Public-domain books are downloaded from Project Gutenberg; plaintext and passwords remain on this computer.\n\nLBC-GEO itself is experimental—not a substitute for modern cryptography. Confidentiality and authentication are provided by AES-256-GCM with Argon2id and HKDF.\n\nPassword loss is permanent. The application contains no recovery backdoor. Secure deletion cannot be guaranteed, especially on SSDs.")]
-        names = ["Dashboard", "LBC-GEO Algorithm", "Encrypt", "Decrypt", "Library", "Keys", "Hash", "Signatures", "History", "Settings", "About"]
+        pages = [DashboardPage(db), AlgorithmPage(), CryptoPage(db, paths, True), CryptoPage(db, paths, False), LibraryPage(db, paths), KeysPage(), HashPage(), SignaturesPage(), InfoPage("History", "History is disabled by default to minimize metadata retention."), InfoPage("Settings", "Defaults: online Gutenberg corpus, CBL-GEO v1, AES-256-GCM, three books per symbol, and automatic corpus verification. Use --portable to store data next to the executable."), InfoPage("About", f"CBL Ciper Pro {__version__}\n\nCBL-GEO v1 is a custom reversible Literary, Nationality & Geographic transformation available as an encryption option. Public-domain books are downloaded from Project Gutenberg; plaintext and passwords remain on this computer.\n\nCBL-GEO itself is experimental—not a substitute for modern cryptography. Confidentiality and authentication are provided by AES-256-GCM with Argon2id and HKDF.\n\nPassword loss is permanent. The application contains no recovery backdoor. Secure deletion cannot be guaranteed, especially on SSDs.")]
+        names = ["Dashboard", "CBL-GEO Algorithm", "Encrypt", "Decrypt", "Library", "Keys", "Hash", "Signatures", "History", "Settings", "About"]
         for name, page in zip(names, pages): self.sidebar.addItem(name); self.stack.addWidget(page)
         self.sidebar.currentRowChanged.connect(self.stack.setCurrentIndex); self.sidebar.setCurrentRow(0); shell.addWidget(sidebar_frame); shell.addWidget(content, 1); self.setCentralWidget(root)

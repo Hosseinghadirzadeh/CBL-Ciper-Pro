@@ -1,5 +1,5 @@
 #define MyAppName "CBL Ciper Pro"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "CBL Ciper Pro"
 #define MyAppExeName "CBL_Ciper_Pro.exe"
 

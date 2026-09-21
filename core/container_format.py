@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import struct
 
-from app.constants import FORMAT_VERSION, LBC_GEO_VERSION, MAGIC
+from app.constants import CBL_GEO_VERSION, FORMAT_VERSION, MAGIC
 from core.errors import ContainerError
 from core.token_codec import canonical_json
 
@@ -27,8 +27,10 @@ def unpack(blob: bytes) -> tuple[dict, bytes, bytes]:
         header = json.loads(raw_header.decode("utf-8"))
     except Exception as exc:
         raise ContainerError("Corrupted LBCX header") from exc
-    if header.get("lbc_geo_version") != LBC_GEO_VERSION:
-        raise ContainerError("Unsupported LBC-GEO version")
+    # Accept the pre-rename field so files from releases <= 1.0.1 remain readable.
+    algorithm_version = header.get("cbl_geo_version", header.get("lbc_geo_version"))
+    if algorithm_version != CBL_GEO_VERSION:
+        raise ContainerError("Unsupported CBL-GEO version")
     aad = blob[:prefix_size] + raw_header
     return header, blob[prefix_size + header_len:], aad
 
@@ -36,4 +38,3 @@ def unpack(blob: bytes) -> tuple[dict, bytes, bytes]:
 def aad_for_header(header: dict, ciphertext_length: int) -> bytes:
     raw = canonical_json(header)
     return MAGIC + struct.pack(">BIQ", FORMAT_VERSION, len(raw), ciphertext_length) + raw
-

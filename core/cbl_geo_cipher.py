@@ -25,7 +25,7 @@ def manifest_for(books: list[Book]) -> list[dict]:
     return [{"gutenberg_id": b.external_id, "sha256": b.sha256, "normalization_version": b.normalization_version, "title": b.title} for b in sorted(books, key=lambda x: x.external_id)]
 
 
-class LBCGeoCipher:
+class CBLGeoCipher:
     def __init__(self, db: Database):
         self.db = db
 
