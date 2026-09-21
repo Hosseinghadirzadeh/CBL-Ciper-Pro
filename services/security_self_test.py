@@ -28,7 +28,7 @@ def run_security_self_test() -> tuple[bool, dict]:
         checks["argon2id"] = len(root) == 32
         keys = separate_keys(root)
         checks["hkdf_key_separation"] = len(set(keys.values())) == len(keys)
-        nonce = os.urandom(12); aad = b"self-test"; message = b"LBC Cipher Pro"
+        nonce = os.urandom(12); aad = b"self-test"; message = b"CBL Ciper Pro"
         checks["aes_256_gcm"] = decrypt(keys["aes"], nonce, encrypt(keys["aes"], nonce, message, aad), aad) == message
         checks["secure_random"] = os.urandom(32) != os.urandom(32)
         with db.session() as connection:

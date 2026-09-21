@@ -23,7 +23,7 @@ class AppPaths:
         if portable:
             root = executable_dir / "portable_data"
         else:
-            root = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local")) / "LBC Cipher Pro"
+            root = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local")) / "CBL Ciper Pro"
         result = cls(root, root / "books", root / "cache", root / "indexes", root / "database", root / "logs", root / "keys")
         for path in result.__dict__.values():
             Path(path).mkdir(parents=True, exist_ok=True)

@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 build/LBC_Cipher_Pro/
+build/CBL_Ciper_Pro/
 installer/output/
 portable_data/
 app/portable_data/

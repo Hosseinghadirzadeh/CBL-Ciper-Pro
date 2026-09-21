@@ -192,7 +192,7 @@ class CryptoPage(BasePage):
     def _run(self, function, *args, done=None):
         self.progress.show(); self.progress.setValue(0); self.text_button.setEnabled(False); self.file_button.setEnabled(False)
         worker = Worker(function, *args); worker.signals.progress.connect(self.progress.setValue)
-        worker.signals.error.connect(lambda message: QMessageBox.critical(self, "LBC Cipher Pro", message))
+        worker.signals.error.connect(lambda message: QMessageBox.critical(self, "CBL Ciper Pro", message))
         if done: worker.signals.result.connect(done)
         worker.signals.finished.connect(lambda: (self.text_button.setEnabled(True), self.file_button.setEnabled(True), self.progress.setValue(100)))
         self.pool.start(worker)
@@ -338,7 +338,7 @@ class InfoPage(BasePage):
 
 class MainWindow(QMainWindow):
     def __init__(self, db: Database, paths):
-        super().__init__(); self.setWindowTitle(f"LBC Cipher Pro {__version__} — LBC-GEO"); self.resize(1280, 820); self.setMinimumSize(1040, 680); self.setStyleSheet(STYLE)
+        super().__init__(); self.setWindowTitle(f"CBL Ciper Pro {__version__} — LBC-GEO"); self.resize(1280, 820); self.setMinimumSize(1040, 680); self.setStyleSheet(STYLE)
         import sys
         root_path = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent))
         icon_path = root_path / "resources" / "app.ico"
@@ -348,14 +348,14 @@ class MainWindow(QMainWindow):
         sidebar_frame = QFrame(); sidebar_frame.setObjectName("sidebar"); sidebar_frame.setFixedWidth(230); sidebar_layout = QVBoxLayout(sidebar_frame); sidebar_layout.setContentsMargins(14, 18, 14, 16)
         brand_row = QHBoxLayout(); logo = QLabel(); logo_path = root_path / "resources" / "app.png"
         if logo_path.exists(): logo.setPixmap(QPixmap(str(logo_path)).scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
-        brand_copy = QVBoxLayout(); brand = QLabel("LBC Cipher Pro"); brand.setObjectName("brand"); version = QLabel(f"VERSION {__version__}"); version.setObjectName("eyebrow"); brand_copy.addWidget(brand); brand_copy.addWidget(version); brand_row.addWidget(logo); brand_row.addLayout(brand_copy); sidebar_layout.addLayout(brand_row); sidebar_layout.addSpacing(18)
+        brand_copy = QVBoxLayout(); brand = QLabel("CBL Ciper Pro"); brand.setObjectName("brand"); version = QLabel(f"VERSION {__version__}"); version.setObjectName("eyebrow"); brand_copy.addWidget(brand); brand_copy.addWidget(version); brand_row.addWidget(logo); brand_row.addLayout(brand_copy); sidebar_layout.addLayout(brand_row); sidebar_layout.addSpacing(18)
         navigation = QLabel("NAVIGATION"); navigation.setObjectName("eyebrow"); sidebar_layout.addWidget(navigation)
         self.sidebar = QListWidget(); sidebar_layout.addWidget(self.sidebar, 1)
         credit = QFrame(); credit.setObjectName("metricCard"); credit_layout = QVBoxLayout(credit); credit_layout.setContentsMargins(12, 11, 12, 11); credit_label = QLabel("CUSTOM ENCRYPTION"); credit_label.setObjectName("eyebrow"); option = QLabel("LBC-GEO v1\nEnabled"); option.setStyleSheet("font-weight:700;color:#eaf6ff"); credit_layout.addWidget(credit_label); credit_layout.addWidget(option); sidebar_layout.addWidget(credit)
         content = QWidget(); content_layout = QVBoxLayout(content); content_layout.setContentsMargins(0, 0, 0, 0); content_layout.setSpacing(0)
         topbar = QFrame(); topbar.setObjectName("topbar"); top = QHBoxLayout(topbar); top.setContentsMargins(24, 13, 24, 13); suite = QLabel("LITERARY · NATIONALITY · GEOGRAPHIC CRYPTOGRAPHIC SYSTEM"); suite.setObjectName("muted"); algorithm = QLabel("LBC-GEO v1"); algorithm.setObjectName("algorithmPill"); secure = QLabel("AES-256-GCM SECURED"); secure.setObjectName("securePill"); top.addWidget(suite); top.addStretch(); top.addWidget(algorithm); top.addWidget(secure); content_layout.addWidget(topbar)
         self.stack = QStackedWidget(); self.stack.setContentsMargins(22, 18, 22, 18); content_layout.addWidget(self.stack, 1)
-        pages = [DashboardPage(db), AlgorithmPage(), CryptoPage(db, paths, True), CryptoPage(db, paths, False), LibraryPage(db, paths), KeysPage(), HashPage(), SignaturesPage(), InfoPage("History", "History is disabled by default to minimize metadata retention."), InfoPage("Settings", "Defaults: online Gutenberg corpus, LBC-GEO v1, AES-256-GCM, three books per symbol, and automatic corpus verification. Use --portable to store data next to the executable."), InfoPage("About", "LBC Cipher Pro 1.0.0\n\nLBC-GEO v1 is a custom reversible Literary, Nationality & Geographic transformation available as an encryption option. Public-domain books are downloaded from Project Gutenberg; plaintext and passwords remain on this computer.\n\nLBC-GEO itself is experimental—not a substitute for modern cryptography. Confidentiality and authentication are provided by AES-256-GCM with Argon2id and HKDF.\n\nPassword loss is permanent. The application contains no recovery backdoor. Secure deletion cannot be guaranteed, especially on SSDs.")]
+        pages = [DashboardPage(db), AlgorithmPage(), CryptoPage(db, paths, True), CryptoPage(db, paths, False), LibraryPage(db, paths), KeysPage(), HashPage(), SignaturesPage(), InfoPage("History", "History is disabled by default to minimize metadata retention."), InfoPage("Settings", "Defaults: online Gutenberg corpus, LBC-GEO v1, AES-256-GCM, three books per symbol, and automatic corpus verification. Use --portable to store data next to the executable."), InfoPage("About", "CBL Ciper Pro 1.0.0\n\nLBC-GEO v1 is a custom reversible Literary, Nationality & Geographic transformation available as an encryption option. Public-domain books are downloaded from Project Gutenberg; plaintext and passwords remain on this computer.\n\nLBC-GEO itself is experimental—not a substitute for modern cryptography. Confidentiality and authentication are provided by AES-256-GCM with Argon2id and HKDF.\n\nPassword loss is permanent. The application contains no recovery backdoor. Secure deletion cannot be guaranteed, especially on SSDs.")]
         names = ["Dashboard", "LBC-GEO Algorithm", "Encrypt", "Decrypt", "Library", "Keys", "Hash", "Signatures", "History", "Settings", "About"]
         for name, page in zip(names, pages): self.sidebar.addItem(name); self.stack.addWidget(page)
         self.sidebar.currentRowChanged.connect(self.stack.setCurrentIndex); self.sidebar.setCurrentRow(0); shell.addWidget(sidebar_frame); shell.addWidget(content, 1); self.setCentralWidget(root)

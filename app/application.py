@@ -30,7 +30,7 @@ def run() -> int:
     from PySide6.QtWidgets import QApplication
     from gui.main_window import MainWindow
     app = QApplication(sys.argv)
-    app.setApplicationName("LBC Cipher Pro")
+    app.setApplicationName("CBL Ciper Pro")
     load_app_font(app)
     paths, db = create_context()
     window = MainWindow(db, paths)

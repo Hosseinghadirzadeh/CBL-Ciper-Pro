@@ -6,5 +6,4 @@ if errorlevel 1 (
   echo Inno Setup 6 ISCC.exe was not found on PATH.
   exit /b 1
 )
-ISCC.exe installer\LBC_Cipher_Pro.iss
-
+ISCC.exe installer\CBL_Ciper_Pro.iss

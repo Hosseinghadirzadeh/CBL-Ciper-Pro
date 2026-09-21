@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 import requests
 
 
-USER_AGENT = "LBC-Cipher-Pro/1.0 (Project Gutenberg client)"
+USER_AGENT = "CBL-Ciper-Pro/1.0 (Project Gutenberg client)"
 
 
 @dataclass(frozen=True)

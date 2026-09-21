@@ -20,9 +20,9 @@ a = Analysis(
 )
 pyz = PYZ(a.pure)
 exe = EXE(
-    pyz, a.scripts, [], exclude_binaries=True, name="LBC_Cipher_Pro", debug=False,
+    pyz, a.scripts, [], exclude_binaries=True, name="CBL_Ciper_Pro", debug=False,
     bootloader_ignore_signals=False, strip=False, upx=True, console=False,
     icon=str(icon) if icon.exists() else None,
     version=str(project / "build" / "version_info.txt"),
 )
-coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=True, upx_exclude=[], name="LBC_Cipher_Pro")
+coll = COLLECT(exe, a.binaries, a.datas, strip=False, upx=True, upx_exclude=[], name="CBL_Ciper_Pro")

@@ -1,6 +1,6 @@
-# LBC Cipher Pro
+# CBL Ciper Pro
 
-LBC Cipher Pro is a Windows desktop application for the experimental **LBC-GEO v1** reversible literary transformation. It combines multiple Project Gutenberg books, author metadata, and geographic metadata, then protects the resulting token stream with established authenticated encryption.
+CBL Ciper Pro is a Windows desktop application for the experimental **LBC-GEO v1** reversible literary transformation. It combines multiple Project Gutenberg books, author metadata, and geographic metadata, then protects the resulting token stream with established authenticated encryption.
 
 The application presents **LBC-GEO v1** as a custom encryption option and includes a dedicated visual page documenting its Multi-Book, Nationality, and Geographic transformation pipeline.
 
@@ -37,7 +37,7 @@ The binary format begins with `LBCX`, format version, header length, ciphertext 
 
 ## Security and threat model
 
-LBC Cipher Pro protects against theft or modification of `.lbcx` files, provides offline-password-guessing resistance through Argon2id, detects corpus mismatch, and detects accidental corruption. Independent HKDF labels prevent direct key reuse.
+CBL Ciper Pro protects against theft or modification of `.lbcx` files, provides offline-password-guessing resistance through Argon2id, detects corpus mismatch, and detects accidental corruption. Independent HKDF labels prevent direct key reuse.
 
 It does **not** protect against a compromised OS, malware, keyloggers, screen capture, weak passwords, plaintext copies elsewhere, password loss, or signing-key loss. There is no password-recovery backdoor. Lost passwords may make data permanently unrecoverable. The application does not claim guaranteed secure deletion; SSD wear-leveling prevents software from reliably guaranteeing physical erasure.
 
@@ -57,15 +57,15 @@ python main.py
 build\build_exe.bat
 ```
 
-The default app data directory is `%LOCALAPPDATA%\LBC Cipher Pro\`. Launch with `LBC_Cipher_Pro.exe --portable` to store data in `portable_data` beside the executable. Writable data is never placed in Program Files.
+The default app data directory is `%LOCALAPPDATA%\CBL Ciper Pro\`. Launch with `CBL_Ciper_Pro.exe --portable` to store data in `portable_data` beside the executable. Writable data is never placed in Program Files.
 
 The reliable PyInstaller output is:
 
 ```text
-dist\LBC_Cipher_Pro\LBC_Cipher_Pro.exe
+dist\CBL_Ciper_Pro\CBL_Ciper_Pro.exe
 ```
 
-Install Inno Setup 6 and run `build\build_installer.bat` to create `installer\output\LBC_Cipher_Pro_Setup.exe`.
+Install Inno Setup 6 and run `build\build_installer.bat` to create `installer\output\CBL_Ciper_Pro_Setup.exe`.
 
 ## Offline use and backup
 
